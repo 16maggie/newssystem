@@ -16,7 +16,7 @@
 	<h3>评论</h3>
 	<c:if test="${commentsByNid != null}">
 		<c:forEach items="${commentsByNid}" var="comment">
-			留言人：${comment.cautho	}  <br>
+			留言人：${comment.cauthor}  <br>
 			留言内容：${comment.ccontent}  <br>
 			留言时间：${comment.cdate}<br>
 			<hr>
@@ -26,14 +26,30 @@
 			留言人：<input type="text" name="cauthor"><br>
 			IP：<input type="text" name="cip" readonly="readonly" value="${pageContext.request.remoteAddr}"><br>
 			<input type="hidden" name="cnid" value="${newsById.nid}"><br>
-			<textarea rows="10" cols="100" name="ccontent">
+			<textarea rows="10" cols="100" name="ccontent"  onblur = "validateMess(this)">
 			
-			</textarea><br>
+			</textarea><span id="mess"> </span><br>
 			<input type="submit">
 	</form>
-	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript">
-	
+			function  validateMess(obj) {
+				debugger
+				$.ajax( {
+				     "url":  "MinGanValidateServlet",                      // 要提交的URL路径
+				     "type" :  "post",                    // 发送请求的方式
+				     "data"  :  {"ccontent":obj.value.trim()},                    // 要发送到服务器的数据
+				     "dataType" :  "text",               // 指定传输的数据格式
+				     "success" :  function(result) {
+				    	 	$("#mess").innerText = result;
+				    	 // 请求成功后要执行的代码
+					     },
+				      "error" :  function() {   
+				    	  // 请求失败后要执行的代码
+					     }
+				} );
+			}
+			
 	
 	</script>
 </body>
