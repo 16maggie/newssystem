@@ -34,7 +34,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript">
 			function  validateMess(obj) {
-				debugger
 				$.ajax( {
 				     "url":  "MinGanValidateServlet",                      // 要提交的URL路径
 				     "type" :  "post",                    // 发送请求的方式

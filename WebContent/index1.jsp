@@ -19,6 +19,10 @@
 </head>
 <body>
 	
+	<c:forEach items="${topicList}" var="topic">
+		<a class="topic" data-tid="${topic.tid}" href="javascript:void(0)">${topic.tname}</a>
+	</c:forEach>
+	
 	<form action="${pageContext.request.contextPath}/deleteNewsServlet" method="post">
 		<table>
 			<tr>
@@ -46,5 +50,24 @@
 			</c:forEach>
 		</table>
 	</form>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(".topic").on('click',function(){
+			var tid = $(this).data("tid")
+			$.ajax({
+				url:"SelectNewsByTidServlet",
+				type:"GET",
+				dataType:"json",
+				data:{"tid":tid},
+				success:function(data){
+					debugger
+				},
+				error:function(){
+					alert("内部错误！")
+				}
+			})
+		})
+	</script>
+	
 </body>
 </html>

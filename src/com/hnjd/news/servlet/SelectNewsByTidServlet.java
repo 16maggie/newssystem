@@ -1,7 +1,6 @@
 package com.hnjd.news.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,37 +11,49 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hnjd.news.dao.NewsDao;
 import com.hnjd.news.dao.NewsDaoImpl;
-import com.hnjd.news.dao.TopicDao;
-import com.hnjd.news.dao.TopicDaoImpl;
 import com.hnjd.news.entity.News;
-import com.hnjd.news.entity.Topic;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
- * Servlet implementation class ToIndexServler
+ * Servlet implementation class SelectNewsByTidServlet
  */
-@WebServlet("/ToIndexServlet")
-public class ToIndexServlet extends HttpServlet {
+@WebServlet("/SelectNewsByTidServlet")
+public class SelectNewsByTidServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SelectNewsByTidServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String tid = request.getParameter("tid");
 		NewsDao newsDao = new NewsDaoImpl();
-		TopicDao topicDao = new TopicDaoImpl();
-		List<News> newsList = new ArrayList<News>();
-		List<Topic> topicList = new ArrayList<Topic>();
+		List<News> newsByTid = null;
 		try {
-			newsList = newsDao.getAllNews();
-			topicList = topicDao.getAllTopic();
+			newsByTid = newsDao.getNewsByTid(Integer.valueOf(tid));
 		} catch (Exception e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
-		
-		request.setAttribute("newsList", newsList);
-		request.setAttribute("topicList", topicList);
-		request.getRequestDispatcher("/index1.jsp").forward(request, response);
+		JSONArray newsList = new JSONArray();
+		for(News news : newsByTid) {
+			JSONObject jo = new JSONObject();
+			jo.put("nid", news.getNid());
+			jo.put("ntitle", news.getNtitle());
+			jo.put("nauthor",news.getNauthor());
+			jo.put("ncreateDate",news.getNcreateDate().toString());
+			newsList.add(jo);
+		}
+		response.getWriter().append(newsList.toString());
 	}
 
 	/**
