@@ -7,24 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="" enctype="application/x-www-form-urlencoded">
-		<input type="text" >
-		<input type="file" >
-	</form>
-	
 	<script type="text/javascript">
-		//创建XMLHttpRequest对象（BOM）
-		var xhr = new XMLHttpRequest();
-		//兼容老版本IE(IE5/IE6)
+		//BOM
+		var xhr = new XMLHttpRequest();	
 		if(xhr == null){
 			xhr = new ActiveXObject("Microsoft.XMLHTTP");
 		}
 		xhr.open("POST","JSAjaxServlet",true);
+		//如果使用get方式提交，提交的参数直接写在地址栏后面，在send()中填入null即可
 		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		//GET请求中，参数直接携带在地址后面，此处填null即可
-		xhr.send("username=张三&age=18&sex=男");
+		xhr.send("username=张三&age=19&sex=男");
+		alert("1")
 		xhr.onreadystatechange = function(){
-			if(xhr.readyState == 4 && xhr.status == 200 ){
+			if(xhr.readyState == 4 && xhr.status == 200){
 				alert(xhr.responseText)
 			}
 		}
