@@ -18,7 +18,7 @@
 </style>
 </head>
 <body>
-	
+	欢迎 !  ${user.uname}<br>
 	<c:forEach items="${topicList}" var="topic">
 		<a class="topic" data-tid="${topic.tid}" href="javascript:void(0)">${topic.tname}</a>
 	</c:forEach>
