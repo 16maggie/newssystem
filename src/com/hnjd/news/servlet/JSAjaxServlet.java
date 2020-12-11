@@ -18,7 +18,7 @@ import net.sf.json.JSONObject;
 /**
  * Servlet implementation class JSAjaxServlet
  */
-@WebServlet("/JSAjaxServlet")
+@WebServlet("/test/t1/JSAjaxServlet")
 public class JSAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

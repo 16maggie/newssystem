@@ -4,4 +4,66 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- 配置servlet -->
+  <servlet>
+  	<servlet-name>testServlet</servlet-name>
+  	<servlet-class>com.hnjd.news.servlet.TestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>testServlet</servlet-name>
+  	<url-pattern>/test.do</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 配置filter -->
+  <filter>
+  	<filter-name>test1</filter-name>
+  	<filter-class>com.hnjd.news.filter.Test1Filter</filter-class>
+  	<!-- 初始参数 -->
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>utf-8</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>test1</filter-name>
+  	<!-- <url-pattern>/*</url-pattern> -->					<!-- 路径匹配 以/开始，以*结束 -->
+  	<!-- <url-pattern>/*/JSAjaxServlet</url-pattern> --> 	<!-- 精准匹配 -->
+  	<url-pattern>*.do</url-pattern>							<!-- 扩展名匹配 -->
+	
+	<!-- 配置filter拦截的请求类型 -->
+	<!-- dispatcher>REQUEST</dispatcher> <只会拦截用户的直接请求 -->
+	<!-- dispatcher>FORWARD</dispatcher> <只会拦截用户来自于转发器（request.getRequestDispatcher("index.jsp").forward(req,resp)） -->
+  	<!-- dispatcher>INCLUDE</dispatcher>  -->
+  
+  </filter-mapping>
+  
+  
+   <filter>
+  	<filter-name>test2</filter-name>
+  	<filter-class>com.hnjd.news.filter.Test2Filter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>test2</filter-name>
+  	<url-pattern>*.do</url-pattern>							<!-- 扩展名匹配 -->
+  </filter-mapping>
+  
+  
+  <filter>
+  	<filter-name>rightFilter</filter-name>
+  	<filter-class>com.hnjd.news.filter.RightFilter</filter-class>
+  	<init-param>
+  		<param-name>ignorePath</param-name>
+  		<param-value>login,register</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>rightFilter</filter-name>
+  	<url-pattern>/*</url-pattern>							
+  </filter-mapping>
+  
+  
+  <session-config>
+  	<session-timeout>30</session-timeout>
+  </session-config>
 </web-app>

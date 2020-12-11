@@ -19,14 +19,14 @@ public class CharacterFilter implements Filter {
      * Default constructor. 
      */
     public CharacterFilter() {
-       System.out.println("Filter创建...");
+       System.out.println("characterFilter创建...");
     }
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		System.out.println("Filter销毁...");
+		System.out.println("characterFilter销毁...");
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class CharacterFilter implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		System.out.println("Filter初始化...");
+		System.out.println("characterFilter初始化...");
 	}
 
 }

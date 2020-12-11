@@ -40,7 +40,6 @@ public class UserLoginServlet extends HttpServlet {
 		UserService userService = new UserService();
 		User user = userService.userLogin(uname, upwd);
 		
-		
 		//将数据传递给前台
 		request.getSession().setAttribute("user", user);
 		if(user == null) {

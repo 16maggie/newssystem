@@ -10,7 +10,7 @@
 <body>
 
 	<c:if test="${user == null && code == 111}">账号密码不正确！</c:if>
-	
+	<c:if test="${user == null && code == 222}">请先登录！</c:if>
 	<form  id="loginForm" action="UserLoginServlet" method="post">
 		<input placeholder="请输入用户名"  name="uname">
 		<input placeholder="请输入密码" name="upwd">
